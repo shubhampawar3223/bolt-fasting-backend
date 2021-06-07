@@ -12,10 +12,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-app.get('/send',(req,res)=>{
-     res.send("Hiee")
-})
-
+//below api is used for user registration
 app.post('/register',async(req,res)=>{
     try{
         let clientInfo = await mongoClient.connect(dbUrl);
@@ -52,6 +49,7 @@ app.post('/register',async(req,res)=>{
     }
 })
 
+//below api is used for user login
 app.post('/login',async(req,res)=>{
 
         try{
@@ -83,6 +81,7 @@ app.post('/login',async(req,res)=>{
 
 })
 
+//below api is used for sending user data.
 app.get("/showdata",authenticate,async(req,res)=>{
     try{
        let clientInfo = await mongoClient.connect(dbUrl);
@@ -96,6 +95,7 @@ app.get("/showdata",authenticate,async(req,res)=>{
     }
 })
 
+//below api is used for saving newly created session.
 app.post("/createSession",authenticate,async(req, res)=>{
     try{
     let clientInfo = await mongoClient.connect(dbUrl);
@@ -111,7 +111,8 @@ app.post("/createSession",authenticate,async(req, res)=>{
         console.log(e);
     }
 })
-//revisit it
+
+//below api is used for editing the session info.
 app.post('/changeValues',authenticate,async(req,res) => {
       try{     
         let clientInfo = await mongoClient.connect(dbUrl);
@@ -130,6 +131,7 @@ app.post('/changeValues',authenticate,async(req,res) => {
       }
 })
 
+//below api is used for saving details of finished session.
 app.post('/sessionComplete',authenticate,async(req,res) => {
     try{
       let clientInfo = await mongoClient.connect(dbUrl);
